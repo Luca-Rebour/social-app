@@ -1,0 +1,16 @@
+div{
+    width: 80vw;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 768px){
+    div{
+        width: 40vw;
+        min-height: 20vh;
+    }
+    
+}

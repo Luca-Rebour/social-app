@@ -1,0 +1,21 @@
+div{
+    display: flex;
+    justify-content: space-around;
+}
+
+button{
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    aspect-ratio: 1;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.like-oculto{
+    display: none;
+}
