@@ -1,17 +1,32 @@
-import { animation } from '@angular/animations';
-import { NgClass, NgStyle } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
+import { ComunicacionServerService } from '../../comunicacion-server.service';
+import { LikesService } from '../../likes.service';
+import { LikeResponse } from '../../likes.service';
 
 @Component({
   selector: 'app-post-footer',
   standalone: true,
-  imports: [NgClass, NgStyle],
+  imports: [NgClass, NgStyle, NgIf],
   templateUrl: './post-footer.component.html',
   styleUrl: './post-footer.component.css'
 })
-export class PostFooterComponent {
+export class PostFooterComponent{
 
-  @Input() data: any;
+  constructor(private likesService: LikesService) { }
+  private _data: any;
+
+  @Input()
+  set data(value: any) {
+    this._data = value;
+    this.likes = value.likes;
+    this.userLiked = value.user_like ? true : false;
+  }
+  get data(): any {
+    return this._data;
+  }
+  userLiked: any;
+  likes: any; // Aquí declaras la variable donde quieres asignar el valor de data
 
   @ViewChild('boton1') boton1?: ElementRef;
 
@@ -25,13 +40,26 @@ export class PostFooterComponent {
   };
 
   toggleLike() {
-    this.boton1?.nativeElement.classList.toggle('like');
-    this.estilo['display'] = this.estilo['display'] === 'none' ? 'inline' : 'none';
-    this.estilo2['display'] = this.estilo2['display'] === 'none' ? 'inline' : 'none';
+    this.userLiked = true
+    console.log(this.userLiked);
+    
+    // this.boton1?.nativeElement.classList.toggle('like');
+    // this.estilo['display'] = this.estilo['display'] === 'none' ? 'inline' : 'none';
+    // this.estilo2['display'] = this.estilo2['display'] === 'none' ? 'inline' : 'none';
     console.log("like");
     setTimeout(() => {
       this.boton1?.nativeElement.classList.remove('like');
     }, 2000);
+    
+    this.likesService.postLike(this.data.post_ID).subscribe(
+      (response: LikeResponse) => {
+        console.log('Like successful', response);
+        this.likes = response.likes;
+      },
+      (error) => {
+        console.error('Like error', error);
+      }
+    );
   }
   
 // Método para calcular la diferencia de tiempo

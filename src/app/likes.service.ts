@@ -1,44 +1,44 @@
-import { Injectable, OnInit } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-  HttpParams,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { LocalStorageService } from './local-storage.service';
+import { Observable, throwError } from 'rxjs';
 
-interface Post {
-  id: number;
-  date: string;
-  user: string;
+export interface LikeResponse {
+  success: boolean;
+  message: string;
   likes: number;
-  comments: number;
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class ComunicacionServerService {
-  usuarioActivo: string = ' ';
+export class LikesService {
+
+  usuarioActivo:string = ' ';
+
   private apiUrl = 'http://localhost/social-app-db';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private local: LocalStorageService
-  ) {}
+  constructor(private http: HttpClient) { }
 
-getPosts(): Observable<Post[]> {
-    let usuarioActivo = encodeURIComponent(this.local.getItem('usuarioActivo') || '');
-    console.log('usuarioActivo', usuarioActivo); // Asegurarse de que el valor es el esperado
-
+  postLike(postId: number): Observable<any> {
+    console.log('postId', postId);
+    
     return this.http
-      .get<Post[]>(`${this.apiUrl}/getPosts.php?usuarioActivo=${usuarioActivo}`)
+      .post(`${this.apiUrl}/likePost.php`, { postId })
       .pipe(catchError(this.handleError));
-}
+  }
+
+  deleteLike(postId: number): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/likePost.php?postId=${postId}&user=${this.usuarioActivo}`)
+      .pipe(catchError(this.handleError));
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

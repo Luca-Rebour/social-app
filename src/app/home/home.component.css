@@ -1,0 +1,60 @@
+.navbar-header{
+    justify-content: flex-end;
+    padding: 0 15px;
+    display: flex;
+}
+.navbar-content{
+    display: flex;
+}
+.navbar-header svg{
+    width: 30px;
+    height: 30px;
+    fill: #363636;
+}
+
+.header-image{
+    justify-content: flex-start;
+    padding: 0 15px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #dfdfdf;
+    color: white;
+    padding: 20px 0;
+    
+}
+
+.header-content{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.header a{
+    text-decoration: none;
+    color: #363636;
+    font-size: larger;
+    padding: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.svg-header{
+    width: 30px;
+    height: 30px;
+    fill: #363636;
+}
+
+.header-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.inbox-container{
+    display: flex;
+    align-items: center;
+}
