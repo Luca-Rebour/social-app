@@ -30,6 +30,10 @@ export class HomeComponent {
     });
   }
 
+  getSpecificPost(postId: any) {
+
+  } 
+
 
 
 }

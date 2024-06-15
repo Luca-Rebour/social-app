@@ -14,32 +14,41 @@ export interface LikeResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LikesService {
-
-  usuarioActivo:string = ' ';
+  usuarioActivo: string = ' ';
 
   private apiUrl = 'http://localhost/social-app-db';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  postLike(postId: number): Observable<any> {
+  postLike(postId: number, user: string): Observable<any> {
     console.log('postId', postId);
+    console.log('user', user);
     
+
     return this.http
-      .post(`${this.apiUrl}/likePost.php`, { postId })
+      .post(`${this.apiUrl}/likePost.php`, { postId, user })
       .pipe(catchError(this.handleError));
   }
 
-  deleteLike(postId: number): Observable<any> {
-    return this.http
-      .delete(`${this.apiUrl}/likePost.php?postId=${postId}&user=${this.usuarioActivo}`)
-      .pipe(catchError(this.handleError));
+  deleteLike(postId: number, user: string): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/likePost.php`,
+      { postId, user, delete: true }
+    );
   }
 
-
-
+  getLikes(postId: number): Observable<any> {
+    console.log('se obtienen los likes del post', postId);
+    
+    return this.http.post(
+      `${this.apiUrl}/likePost.php`,
+      { postId, get: 'likes' }
+    );
+  }
+  
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente o de red.
