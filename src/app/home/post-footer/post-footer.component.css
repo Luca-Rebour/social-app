@@ -9,6 +9,9 @@ button{
     border: none;
     cursor: pointer;
     aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 p{

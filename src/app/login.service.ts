@@ -7,13 +7,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../app/environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private apiUrl = 'http://localhost/social-app-db';
+  private apiUrl: string = environment.api_url;
 
   constructor(private http: HttpClient, private router: Router) { }
   

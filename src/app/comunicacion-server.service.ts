@@ -9,6 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
+import { environment } from '../app/environment/environment';
 
 interface Post {
   id: number;
@@ -23,7 +24,7 @@ interface Post {
 })
 export class ComunicacionServerService {
   usuarioActivo: string = ' ';
-  private apiUrl = 'http://localhost/social-app-db';
+  private apiUrl:string = environment.api_url;
 
   constructor(
     private http: HttpClient,
