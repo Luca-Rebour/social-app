@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
-import { environment } from '../app/environment/environment';
+import { environment } from './environment/environment';
 
 interface Post {
   id: number;
@@ -22,7 +22,7 @@ interface Post {
 @Injectable({
   providedIn: 'root',
 })
-export class ComunicacionServerService {
+export class getPostsService {
   usuarioActivo: string = ' ';
   private apiUrl:string = environment.api_url;
 
@@ -34,10 +34,10 @@ export class ComunicacionServerService {
 
 getPosts(): Observable<Post[]> {
     let usuarioActivo = encodeURIComponent(this.local.getItem('usuarioActivo') || '');
-    console.log('usuarioActivo', usuarioActivo); // Asegurarse de que el valor es el esperado
+    console.log('usuarioActivo', usuarioActivo); 
 
     return this.http
-      .get<Post[]>(`${this.apiUrl}/getPosts.php?usuarioActivo=${usuarioActivo}`)
+      .post<Post[]>(`${this.apiUrl}/getPosts.php`, { userId: usuarioActivo })
       .pipe(catchError(this.handleError));
 }
 

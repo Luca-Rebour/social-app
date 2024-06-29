@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { LoginService } from '../login.service';
 import { LikesService } from '../likes.service';
-import { ComunicacionServerService } from '../comunicacion-server.service';
 import { LocalStorageService } from '../local-storage.service';
 
 
@@ -16,23 +15,21 @@ import { LocalStorageService } from '../local-storage.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  constructor(private login: LoginService, private router: Router, private likesService: LikesService, private comunicacionServer: ComunicacionServerService, private local: LocalStorageService) {}
+  constructor(private login: LoginService, private router: Router, private likesService: LikesService, private local: LocalStorageService) {}
 
   user? : string;
   password? : string;
   credencialesInvalidas = false;
 
   onSubmit() {
-    this.local.setItem('usuarioActivo', this.user || '');
     console.log('Login', this.user, this.password);
     
     this.login.login(this.user || "", this.password || "")
       .subscribe(
         (response) => {
           console.log('Login successful', response);
-          this.likesService.usuarioActivo = this.user || "";
-          
           this.router.navigate(['/home']);
+          this.local.setItem('usuarioActivo', response.userId || '');
         },
         (error) => {
           console.error('Login error', error);

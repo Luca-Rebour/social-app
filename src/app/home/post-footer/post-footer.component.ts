@@ -1,6 +1,5 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
-import { ComunicacionServerService } from '../../comunicacion-server.service';
 import { LikesService } from '../../likes.service';
 import { LikeResponse } from '../../likes.service';
 import { LocalStorageService } from '../../local-storage.service';

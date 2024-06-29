@@ -1,13 +1,13 @@
 import { Component, Directive, ElementRef, EventEmitter, Output  } from '@angular/core';
 import { PostCardComponent } from './post-card/post-card.component';
-import { ComunicacionServerService } from '../comunicacion-server.service';
-import { NgFor } from '@angular/common';
+import { getPostsService } from '../get-posts.service';
+import { KeyValuePipe, NgFor } from '@angular/common';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PostCardComponent, NgFor],
+  imports: [PostCardComponent, NgFor, KeyValuePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -16,14 +16,14 @@ export class HomeComponent {
 
   posts?: any;
 
-  constructor(private comunicacionServerService: ComunicacionServerService) {}
+  constructor(private getPostsService: getPostsService) {}
 
   ngOnInit() {
     this.getPosts();
   }
 
   getPosts() {
-    this.comunicacionServerService.getPosts().subscribe((data: any) => {
+    this.getPostsService.getPosts().subscribe((data: any) => {
       this.posts = data;
       console.log(this.posts);
       

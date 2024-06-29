@@ -19,13 +19,16 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) { }
   
 
-  login(mail: string, password: string): Observable<any> {
-    const loginData = { mail, password };
+  // HACE LA VERIFICACION DE USUARIO Y CONTRASEÑA CONTRA EL BACKEND
+  login(username: string, password: string): Observable<any> {
+    const loginData = { username, password };
     return this.http
       .post(`${this.apiUrl}/login.php`, loginData)
       .pipe(catchError(this.handleError));
   }
+  
 
+  // MANEJA LOS ERRORES DE LA PETICION HTTP
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente o de red.

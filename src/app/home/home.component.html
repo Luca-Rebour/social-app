@@ -27,6 +27,6 @@
   </nav>
 <main>
 
-    <app-post-card *ngFor="let post of posts" [post]="post"></app-post-card>
+    <app-post-card *ngFor="let post of posts | keyvalue" [post]="post"></app-post-card>
 
 </main>
