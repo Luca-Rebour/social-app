@@ -6,6 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { environment } from '../app/environment/environment';
 
 export interface LikeResponse {
   success: boolean;
@@ -19,33 +20,26 @@ export interface LikeResponse {
 export class LikesService {
   usuarioActivo: string = ' ';
 
-  private apiUrl = 'http://localhost/social-app-db';
+  private apiUrl: string = environment.api_url;
 
   constructor(private http: HttpClient) {}
 
-  postLike(postId: number, user: string): Observable<any> {
+  postLike(postId: number, userId: number): Observable<any> {
     console.log('postId', postId);
-    console.log('user', user);
+    console.log('user', userId);
     
 
     return this.http
-      .post(`${this.apiUrl}/likePost.php`, { postId, user })
+      .post(`${this.apiUrl}/likePost.php`, { postId, userId, action : 'like'})
       .pipe(catchError(this.handleError));
   }
 
-  deleteLike(postId: number, user: string): Observable<any> {
-    return this.http.post(
-      `${this.apiUrl}/likePost.php`,
-      { postId, user, delete: true }
-    );
-  }
-
-  getLikes(postId: number): Observable<any> {
-    console.log('se obtienen los likes del post', postId);
+  deleteLike(postId: number, userId: number): Observable<any> {
+    console.log('postId', postId);
     
     return this.http.post(
       `${this.apiUrl}/likePost.php`,
-      { postId, get: 'likes' }
+      { postId, userId, action: 'unlike' }
     );
   }
   

@@ -29,7 +29,9 @@ export class LoginComponent {
         (response) => {
           console.log('Login successful', response);
           this.router.navigate(['/home']);
-          this.local.setItem('usuarioActivo', response.userId || '');
+          this.local.setItem('IdUsuarioActivo', response.userId || '');
+          console.log('IdUsuarioActivo', response.userId);
+          
         },
         (error) => {
           console.error('Login error', error);

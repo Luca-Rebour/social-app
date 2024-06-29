@@ -3,7 +3,7 @@ div{
     justify-content: space-around;
 }
 
-button{
+.icon-btn{
     position: relative;
     background-color: transparent;
     border: none;
@@ -12,6 +12,7 @@ button{
     display: flex;
     align-items: center;
     gap: 5px;
+    border: 0px;
 }
 
 p{
@@ -22,4 +23,11 @@ p{
 
 .like-btn{
     fill: red;
+}
+
+.likes-container{
+    border: 0px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

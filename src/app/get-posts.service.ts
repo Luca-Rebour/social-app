@@ -5,24 +5,27 @@ import {
   HttpHeaders,
   HttpParams,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, map } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
 import { environment } from './environment/environment';
+import { Post, PostModel, PostsResponse } from './models/post.model';
 
-interface Post {
-  id: number;
-  date: string;
-  user: string;
-  likes: number;
-  comments: number;
+
+interface comments {
+  commentId: number;
+  commentDate: string;
+  commentText: string;
+  userId: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class getPostsService {
+
   usuarioActivo: string = ' ';
   private apiUrl:string = environment.api_url;
 
@@ -32,27 +35,30 @@ export class getPostsService {
     private local: LocalStorageService
   ) {}
 
-getPosts(): Observable<Post[]> {
-    let usuarioActivo = encodeURIComponent(this.local.getItem('usuarioActivo') || '');
-    console.log('usuarioActivo', usuarioActivo); 
+getPosts(): Observable<PostModel[]> {
+  this.usuarioActivo = encodeURIComponent(this.local.getItem('usuarioActivo') || '');
+  console.log('usuarioActivo', this.usuarioActivo); 
 
-    return this.http
-      .post<Post[]>(`${this.apiUrl}/getPosts.php`, { userId: usuarioActivo })
-      .pipe(catchError(this.handleError));
+  return this.http
+    .post<PostsResponse>(`${this.apiUrl}/getPosts.php`, { userId: this.usuarioActivo })
+    .pipe(
+      map(response => response.posts.map(post => new PostModel(post))),
+      catchError(this.handleError)
+    );
 }
+  
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // Error del lado del cliente o de red.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // El backend devolvió un código de respuesta fallido.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-          `body was: ${error.error.message}`
-      );
+
+
+
+  handleError(error: any): Observable<never> {
+    let errorMessage = 'An unknown error occurred.';
+    if (error) {
+      errorMessage = error.message ? error.message : errorMessage;
     }
-    // Devuelve un observable con un mensaje de error para el usuario.
-    return throwError(error.status);
+    console.error(errorMessage);
+    // Optionally, navigate to an error page or show an error message to the user.
+    // this.router.navigate(['/error']);
+    return throwError(() => new Error(errorMessage));
   }
 }

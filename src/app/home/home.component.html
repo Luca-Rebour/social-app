@@ -1,32 +1,59 @@
 <nav class="header">
-    <div class="header-content">
-      <div >
-        <div >
-          <a href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="svg-header bi bi-person-circle" viewBox="0 0 16 16">
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-            </svg>
-          </a>
-        </div>
+  <div class="header-content">
+    <div>
+      <div>
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="svg-header bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+            <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+          </svg>
+        </a>
       </div>
-      <a href="#">Social App</a>
-      <div class="inbox-container">
-        <div >
-          <a href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-              fill="currentColor" class="bi bi-envelope svg-header"
-              viewBox="0 0 16 16">
-              <path
-                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-            </svg>
-          </a>
+    </div>
+    <a href="#">Social App</a>
+    <div class="inbox-container">
+      <div>
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-envelope svg-header" viewBox="0 0 16 16">
+            <path
+              d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+<main>
+
+  <app-post-card *ngFor="let post of posts" [post]="post"></app-post-card>
+
+  <!-- MoODAL DE COMENTARIOS DE PUBLICACIONES -->
+  <div class="modal fade" id="commentsModal" tabindex="-1" aria-labelledby="comments" aria-hidden="true" #modalRef>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let comment of comments" class="comments-container">
+            <h5>{{ comment.comment_user_id }}</h5>
+
+            <p>{{ comment.comment_text }}</p>
+            <p> {{comment.comment_date}} </p>
+            
+          </div>
+          
+        </div>
+        <div class="modal-footer"><div class="comment-box-container">
+            <input type="text" name="comment" id="comment-box" placeholder="Agregar un comentario" #commentInput>
+            <button type="button" class="btn btn-primary">Enviar</button>
+          </div>
         </div>
       </div>
     </div>
-  </nav>
-<main>
-
-    <app-post-card *ngFor="let post of posts | keyvalue" [post]="post"></app-post-card>
-
+  </div>
 </main>

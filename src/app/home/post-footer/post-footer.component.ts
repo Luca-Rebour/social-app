@@ -1,8 +1,10 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
-import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { LikesService } from '../../likes.service';
 import { LikeResponse } from '../../likes.service';
 import { LocalStorageService } from '../../local-storage.service';
+import { CommentsService } from '../../comments.service';
+
 
 @Component({
   selector: 'app-post-footer',
@@ -11,39 +13,39 @@ import { LocalStorageService } from '../../local-storage.service';
   templateUrl: './post-footer.component.html',
   styleUrl: './post-footer.component.css',
 })
-export class PostFooterComponent {
-  constructor(
-    private likesService: LikesService,
-    private storage: LocalStorageService
-  ) {}
-  @Input()
-  set data(value: any) {
-    this._data = value;
-    this.likes = value.likes;
-    this.userLiked = value.user_like ? true : false;
+export class PostFooterComponent implements OnInit{
+  @Input() data: any;
+  likes: number = 0;
+  userLiked: boolean = false;
+  IdUsuarioActivo: number = 0;
+  ActiveUserId: number = 0;
+  ngOnInit(): void {
+       this.likes = this.data.likeCount;
+        this.userLiked = this.data.userLiked;
+        this.ActiveUserId = this.storage.getItem('IdUsuarioActivo');
   }
-  private _data: any;
 
-  get data(): any {
-    return this._data;
-  }
-  userLiked: any;
-  likes: any;
 
   @ViewChild('boton1') boton1?: ElementRef;
 
-  usuario: string = this.storage.getItem('usuarioActivo');
+  constructor(
+    private likesService: LikesService,
+    private storage: LocalStorageService,
+    private commentsService: CommentsService
+  ) {}
+
+
 
   likesHandle() {
     if (!this.userLiked) {
       this.userLiked = true;
       console.log(this.userLiked);
-      console.log(this.usuario);
-      console.log(this.data.post_ID);
+      console.log(this.data.postId);
+      console.log("Usuario Activo " + this.ActiveUserId);
 
       console.log('like');
 
-      this.likesService.postLike(this.data.post_ID, this.usuario).subscribe(
+      this.likesService.postLike(this.data.postId, this.ActiveUserId).subscribe(
         (response: LikeResponse) => {
           console.log('Like successful', response);
           this.likes = response.likes;
@@ -57,18 +59,10 @@ export class PostFooterComponent {
       console.log(this.userLiked);
       console.log('Remove like');
 
-      this.likesService.deleteLike(this.data.post_ID, this.usuario).subscribe(
+      this.likesService.deleteLike(this.data.postId, this.ActiveUserId).subscribe(
         (response: any) => {
           console.log('Se elimino el like correctamente', response);
           this.likes = response.likes;
-          this.likesService.getLikes(this.data.post_ID).subscribe(
-            (response: any) => {
-              this.likes = response.likes;
-            },
-            (error) => {
-              console.error('Error al obtener la cantidad de likes', error);
-            }
-          );
         },
         (error) => {
           console.error('Error al eliminar el like', error);
@@ -76,10 +70,18 @@ export class PostFooterComponent {
       );
     }
   }
+  
+  verComentarios() {
+   console.log('Ver comentarios');
+   this.commentsService.updateComments(JSON.parse(this.data.comments));
+    console.log(this.data.comments);
+    
+  }
+
 
   // Método para calcular la diferencia de tiempo
   calcularDiferencia() {
-    const fechaData = new Date(this.data.post_date);
+    const fechaData = new Date(this.data.postDate);
     const fechaActual = new Date();
 
     // Calcular la diferencia en milisegundos
