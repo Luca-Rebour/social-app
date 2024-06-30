@@ -73,8 +73,8 @@ export class PostFooterComponent implements OnInit{
   
   verComentarios() {
    console.log('Ver comentarios');
-   this.commentsService.updateComments(JSON.parse(this.data.comments));
-    console.log(this.data.comments);
+   this.commentsService.loadComments(JSON.parse(this.data.postId));
+    console.log(this.data.postId);
     
   }
 
