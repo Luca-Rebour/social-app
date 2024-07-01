@@ -1,0 +1,24 @@
+svg{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    fill: #ffffff;
+    background-color: #0d6efd;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#post{
+    display: flex;
+    padding-top: 0; text-align: left;
+    height: 25vh;
+    padding: 10px;
+}
+
+.alert{
+    p{
+        margin: 0;
+    }
+}
