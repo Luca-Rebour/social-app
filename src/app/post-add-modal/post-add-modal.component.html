@@ -22,7 +22,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="publishPost()" (click)="showToast()">Publicar</button>
+          <button type="button" class="btn btn-primary" (click)="publishPost()">Publicar</button>
         </div>
       </div>
     </div>
@@ -31,6 +31,8 @@
 
   <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
-<ngb-toast header="Toast header" [autohide]="false" [delay]="5000" [dismissible]="true" (dismissEvent)="dismissEvent($event)">
-  This is a toast
-</ngb-toast>
+  @if (showToast) {
+    <ngb-toast header="Publicado" [autohide]="false" [delay]="3000">
+      Tu post ha sido publicado correctamente
+    </ngb-toast>
+}

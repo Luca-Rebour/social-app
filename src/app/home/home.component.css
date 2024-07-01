@@ -130,3 +130,10 @@
         fill: rgb(224, 31, 31);
     }
 }
+
+ngb-toast{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}

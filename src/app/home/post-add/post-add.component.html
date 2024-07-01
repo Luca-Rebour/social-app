@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+  </svg>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Hacer publicacion</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="post-add-container">
+                <textarea name="post" id="post" cols="30" rows="10" placeholder="Escribe tu publicacion" #post></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="publish()">Publicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #successTpl>Tu publicacion fue realizada con exito</ng-template>
+  <ng-template #errorTpl>Hubo un error al realizar tu publicacion</ng-template>
+  <ng-template #emptyTpl>La publicacion no puede estar vacia</ng-template>
