@@ -3,13 +3,14 @@ import { MakePostsService } from '../../make-posts.service';
 import { ToastService } from '../../toast.service';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-post-add',
   standalone: true,
-  imports: [NgbToastModule, NgTemplateOutlet],
+  imports: [NgbToastModule, NgTemplateOutlet, FormsModule],
   templateUrl: './post-add.component.html',
   styleUrl: './post-add.component.css'
 })
@@ -39,7 +40,9 @@ export class PostAddComponent implements OnDestroy {
   post: string = '';
   error: boolean = false;
   publish(){
-    if(this.post.length === 0){
+    console.log('Post publicado', this.post);
+    
+    if(this.post.length == 0){
       this.showDanger(this.emptyTpl);
       return;
     }
@@ -47,7 +50,7 @@ export class PostAddComponent implements OnDestroy {
     this._makePostService.makePost(this.post).subscribe((response) => {
       console.log('Post successful', response);
       this.showSuccess(this.successTpl);
-      
+      this.post = '';
     },
     (error) => {
       this.error = true;
