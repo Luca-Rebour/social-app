@@ -87,6 +87,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         (response: any) => {
           console.log("Comentario enviado:", response);
           this.commentsService.loadComments(this.id);
+          this.commentInput.nativeElement.value = '';
         },
         (error) => {
           console.error("Error al enviar comentario:", error);
@@ -107,6 +108,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         console.error("Error al eliminar comentario:", error);
       }
     );
+  }
+
+  logout() {
+    this.local.removeItem('IdUsuarioActivo');
+    this.local.removeItem('UsuarioActivo');
+    window.location.reload();
   }
     
 }
