@@ -43,4 +43,8 @@ export class LocalStorageService {
       console.log('Error al limpiar el local storage', e);
     }
   }
+
+  isLoggedIn() {
+    return !!this.getItem('IdUsuarioActivo');
+  }
 }

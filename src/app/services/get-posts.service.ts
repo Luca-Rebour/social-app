@@ -9,8 +9,8 @@ import { Observable, throwError, map } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
-import { environment } from './environment/environment';
-import { Post, PostModel, PostsResponse } from './models/post.model';
+import { environment } from './../environment/environment';
+import { Post, PostModel, PostsResponse } from './../models/post.model';
 
 
 interface comments {
@@ -36,7 +36,7 @@ export class getPostsService {
   ) {}
 
 getPosts(): Observable<PostModel[]> {
-  this.usuarioActivo = encodeURIComponent(this.local.getItem('usuarioActivo') || '');
+  this.usuarioActivo = encodeURIComponent(this.local.getItem('IdUsuarioActivo') || '');
   console.log('usuarioActivo', this.usuarioActivo); 
 
   return this.http

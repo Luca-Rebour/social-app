@@ -1,6 +1,6 @@
 import { Component, ViewChild, inject, OnDestroy, TemplateRef } from '@angular/core';
-import { MakePostsService } from '../../make-posts.service';
-import { ToastService } from '../../toast.service';
+import { MakePostsService } from '../../../services/make-posts.service';
+import { ToastService } from '../../../services/toast.service';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';

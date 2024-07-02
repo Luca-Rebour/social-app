@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { environment } from '../app/environment/environment';
+import { environment } from '../environment/environment';
 
 export interface LikeResponse {
   success: boolean;

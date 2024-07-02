@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from './environment/environment';
-import { CommentModel, CommentResponse, Comment } from './models/comment.model';
+import { environment } from '../environment/environment';
+import { CommentModel, CommentResponse, Comment } from '../models/comment.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({

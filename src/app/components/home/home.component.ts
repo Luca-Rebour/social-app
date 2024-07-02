@@ -7,17 +7,17 @@ import {
   inject
 } from '@angular/core';
 import { PostCardComponent } from './post-card/post-card.component';
-import { getPostsService } from '../get-posts.service';
-import { CommentsService } from '../comments.service';
-import { PostModel } from '../models/post.model';
+import { getPostsService } from '../../services/get-posts.service';
+import { CommentsService } from '../../services/comments.service';
+import { PostModel } from '../../models/post.model';
 import { KeyValuePipe, NgFor, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { CommentModel } from '../models/comment.model';
-import { LocalStorageService } from '../local-storage.service';
+import { CommentModel } from '../../models/comment.model';
+import { LocalStorageService } from '../../services/local-storage.service';
 import { PostAddComponent } from './post-add/post-add.component';
 
 
-import { ToastService } from '../toast.service';
+import { ToastService } from '../../services/toast.service';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 

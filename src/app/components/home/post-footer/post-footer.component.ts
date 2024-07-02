@@ -1,9 +1,8 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { LikesService } from '../../likes.service';
-import { LikeResponse } from '../../likes.service';
-import { LocalStorageService } from '../../local-storage.service';
-import { CommentsService } from '../../comments.service';
+import { LikesService,LikeResponse } from '../../../services/likes.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { CommentsService } from '../../../services/comments.service';
 
 
 @Component({
@@ -20,8 +19,11 @@ export class PostFooterComponent implements OnInit{
   IdUsuarioActivo: number = 0;
   ActiveUserId: number = 0;
   ngOnInit(): void {
+    
        this.likes = this.data.likeCount;
         this.userLiked = this.data.userLiked;
+        console.log("post" + this.data.postId+ " liked " + this.data.userLiked);
+        
         this.ActiveUserId = this.storage.getItem('IdUsuarioActivo');
   }
 

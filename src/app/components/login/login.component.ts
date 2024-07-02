@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { LoginService } from '../login.service';
-import { LikesService } from '../likes.service';
-import { LocalStorageService } from '../local-storage.service';
+import { LoginService } from '../../services/login.service';
+import { LikesService } from '../../services/likes.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 
 @Component({

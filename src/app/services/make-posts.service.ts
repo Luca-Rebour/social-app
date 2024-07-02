@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../app/environment/environment';
+import { environment } from '../environment/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from './local-storage.service'
 
 @Injectable({
   providedIn: 'root',

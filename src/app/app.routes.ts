@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component'
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './components/home/home.component'
+import { LoginComponent } from './components/login/login.component';
+import { loggedInGuard } from './guards/logged-in.guard';
 
 export const routes: Routes = [
     {
@@ -9,6 +10,7 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [loggedInGuard]
     }
 ];
