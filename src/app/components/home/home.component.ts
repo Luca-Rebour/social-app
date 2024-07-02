@@ -20,11 +20,12 @@ import { PostAddComponent } from './post-add/post-add.component';
 import { ToastService } from '../../services/toast.service';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PostCardComponent, NgFor, KeyValuePipe, NgIf, PostAddComponent, NgTemplateOutlet, NgbToastModule],
+  imports: [PostCardComponent, NgFor, KeyValuePipe, NgIf, PostAddComponent, NgTemplateOutlet, NgbToastModule, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
