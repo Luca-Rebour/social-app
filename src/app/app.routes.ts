@@ -3,6 +3,7 @@ import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { loggedInGuard } from './guards/logged-in.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -17,5 +18,10 @@ export const routes: Routes = [
     {
         path: 'signUp',
         component: SignUpComponent
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [loggedInGuard]
     }
 ];

@@ -22,16 +22,16 @@ export class LoginComponent {
   credencialesInvalidas = false;
 
   onSubmit() {
-    console.log('Login', this.user, this.password);
     
     this.login.login(this.user || "", this.password || "")
       .subscribe(
         (response) => {
+        
           console.log('Login successful', response);
           this.router.navigate(['/home']);
           this.local.setItem('IdUsuarioActivo', response.userId || '');
-          console.log('IdUsuarioActivo', response.userId);
-          
+          this.local.setItem('nombreUsuarioActivo', response.name || '');
+          this.local.setItem('apellidoUsuarioActivo', response.last_name || '');         
         },
         (error) => {
           console.error('Login error', error);

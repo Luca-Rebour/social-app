@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
 import { environment } from './../environment/environment';
 import { Post, PostModel, PostsResponse } from './../models/post.model';
+import { HitPost, HitPostModel, HitPostsResponse } from '../models/hitPost.model';
 
 
 interface comments {
@@ -43,6 +44,20 @@ getPosts(): Observable<PostModel[]> {
     .post<PostsResponse>(`${this.apiUrl}/getPosts.php`, { userId: this.usuarioActivo })
     .pipe(
       map(response => response.posts.map(post => new PostModel(post))),
+      catchError(this.handleError)
+    );
+}
+
+getHitPosts(userId: string): Observable<HitPostModel[]> {
+  console.log('Fetching hit posts for userId:', userId);
+
+  return this.http
+    .post<HitPostsResponse>(`${this.apiUrl}/getHitPosts.php`, { userId })
+    .pipe(
+      map(response => {
+        console.log('HitPostsResponse:', response);
+        return response.posts.map(post => new HitPostModel(post));
+      }),
       catchError(this.handleError)
     );
 }

@@ -40,7 +40,6 @@ export class PostAddComponent implements OnDestroy {
   post: string = '';
   error: boolean = false;
   publish(){
-    console.log('Post publicado', this.post);
     
     if(this.post.length == 0){
       this.showDanger(this.emptyTpl);
