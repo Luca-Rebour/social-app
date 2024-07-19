@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 0px;
+
+    div {
+        display: flex;
+        row-gap: 12px;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 5px;
+        min-width: 25vw;
+        background-color: #053156;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: large;
+    }
+
+    p {
+        margin: 0;
+        font-size: medium;
+    }
+}

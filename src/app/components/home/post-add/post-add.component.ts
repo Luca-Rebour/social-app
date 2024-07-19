@@ -4,6 +4,7 @@ import { ToastService } from '../../../services/toast.service';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from '../home.component';
 
 
 
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class PostAddComponent implements OnDestroy {
 
-  constructor(private _makePostService: MakePostsService) {}
+  constructor(private _makePostService: MakePostsService, private home: HomeComponent) {}
 
   toastService = inject(ToastService);
   @ViewChild('successTpl', { static: true }) successTpl!: TemplateRef<any>
@@ -50,6 +51,8 @@ export class PostAddComponent implements OnDestroy {
       console.log('Post successful', response);
       this.showSuccess(this.successTpl);
       this.post = '';
+      this.home.getPosts();
+
     },
     (error) => {
       this.error = true;

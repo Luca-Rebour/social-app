@@ -1,8 +1,9 @@
-
 @media screen and (min-width: 768px) {
     .container1{
         display: flex;
         padding: 40px !important;
+        display: flex;
+    justify-content: center;
     }
     .container-profile-biography{
         width: 50%;
@@ -10,11 +11,15 @@
     .profile-data{
         width: 50% !important; 
     }
+    .hit-posts-container{
+      margin: 0 auto !important;
+    }
 }
 
 
 .container1{
   padding: 20px;
+  color: aliceblue;
 }
 .profile-data {
     display: flex;
@@ -23,11 +28,6 @@
     flex-direction: column;
     margin-top: 20px;
     row-gap: 10px;
-    div {
-      display: flex;
-      align-items: center;
-      column-gap: 5px;
-    }
     button {
       width: 100%;
       font-weight: 600;
@@ -41,7 +41,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px;  
+
+    h6{
+        margin: 0;
+        padding: 5px;
+    }
   }
   
   .hit-post-container h6 {
@@ -89,3 +94,14 @@
     margin: 5vh auto;
   }
   
+  .container-name{
+    display: grid;
+
+  }
+
+  .container-img-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+  }

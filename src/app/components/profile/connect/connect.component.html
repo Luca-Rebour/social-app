@@ -1,0 +1,15 @@
+<div>
+<h6>CONNECT</h6>
+<div class="container">
+    
+    <div *ngFor="let profile of profiles">
+        <h3> {{profile.name }} {{ profile.lastName }}</h3>
+        <p> Followers: {{profile.followers }} </p>        
+        <button (click)="follow(profile.id)" class="btn btn-success" *ngIf="!profile.followedBy">Follow</button>
+        <button (click)="unfollow(profile.id)" class="btn btn-danger" *ngIf="profile.followedBy">Unfollow</button>
+
+    </div>
+</div>
+
+</div>
+

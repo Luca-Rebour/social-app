@@ -30,8 +30,10 @@ export class LoginComponent {
           console.log('Login successful', response);
           this.router.navigate(['/home']);
           this.local.setItem('IdUsuarioActivo', response.userId || '');
+          this.local.setItem('usernameActivo', response.username || '');
           this.local.setItem('nombreUsuarioActivo', response.name || '');
-          this.local.setItem('apellidoUsuarioActivo', response.last_name || '');         
+          this.local.setItem('apellidoUsuarioActivo', response.last_name || '');  
+          this.local.setItem('biografiaUsuarioActivo', response.biography || '');       
         },
         (error) => {
           console.error('Login error', error);

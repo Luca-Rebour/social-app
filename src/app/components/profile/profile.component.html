@@ -2,7 +2,7 @@
 <div class="container1">
   <div class="container-profile-biography">
     <div class="profile-data">
-      <div>
+      <div class="container-img-name">
         <div class="img-portada-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-person-circle img-portada" viewBox="0 0 16 16">
@@ -11,29 +11,75 @@
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
         </div>
-        <h3> {{name}} {{lastName}} </h3>
+        <div class="container-name">
+        <h2>{{ username }}</h2>
+        <p> {{name}} {{lastName}} </p>
       </div>
-      <button class="btn btn-primary">EDIT PROFILE</button>
+      </div>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">EDIT PROFILE</button>
     </div>
 
     <div class="biography-container">
       <h5>BIOGRAPHY</h5>
-      <p>Hi! I'm Luca, a 18 years old developer from Uruguay. I love coding and I'm always looking for new challenges.
-      </p>
+      <p>{{biography}}</p>
     </div>
   </div>
-  <div class="hit-posts-container">
-    <h5>HIT POSTS</h5>
-    <div *ngFor="let post of hitPosts">
-      <div class="hit-post-container">
-        <h6>{{post.postText}}</h6>
-        <div class="post-likes">
-          <p>{{post.likeCount}}</p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
-            class="bi bi-heart-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
-          </svg>
+
+  <div>
+    <div class="hit-posts-container">
+      <h5>HIT POSTS</h5>
+      <div *ngFor="let post of hitPosts">
+        <div class="hit-post-container">
+          <h6>{{post.postText}}</h6>
+          <div class="post-likes">
+            <p>{{post.likeCount}}</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+            </svg>
+          </div>
         </div>
+      </div>
+    </div>
+    <app-connect />
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-edit">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar perfil</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeForm()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="usernameEdit" placeholder="Enter your new username">
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" name="biography" placeholder="Write something about you" id="floatingTextarea2" style="height: 100px" [(ngModel)]="biographyEdit"></textarea>
+            <label for="floatingTextarea2">Biography</label>
+          </div>
+          <div class="mb-3">
+            <label for="currentPass" class="form-label">Current password</label>
+            <input type="password" class="form-control" name="currentPass" [(ngModel)]="currentPass" placeholder="Enter your current password">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="passEdit" [(ngModel)]="passEdit" placeholder="Enter your new password">
+          </div>
+          <div class="mb-3">
+            <label for="password2" class="form-label">Repeat password</label>
+            <input type="password" class="form-control" name="passEdit2" [(ngModel)]="passEdit2" placeholder="Confirm your new password">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeForm()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="edit()">Save changes</button>
       </div>
     </div>
   </div>
